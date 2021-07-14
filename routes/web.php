@@ -21,10 +21,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::redirect('/', '/admin/dashboard');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-    Route::resource('users', UsersController::class);
+    Route::resource('users', 'Admin\UsersController');
+    Route::resource('pages', 'Admin\PagesController');
 });
-
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
 });
 
@@ -38,7 +38,7 @@ Route::middleware(['auth:web,admin'])->group(function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth:web,admin'])->name('dashboard');
+})->middleware(['auth:web,admin'])->name('dashboard');*/
 
 
 require __DIR__ . '/auth.php';

@@ -236,7 +236,7 @@ return [
         ],
         [
             'text' => 'Пользователи',
-            'route' => 'admin.users',
+            'route' => 'admin.users.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

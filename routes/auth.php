@@ -19,7 +19,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
         ->middleware('guest:admin');
 });
 
-Route::get('/register', [RegisteredUserController::class, 'create'])
+/*Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->middleware('guest')
                 ->name('register');
 
@@ -70,4 +70,4 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 
 Route::match(['GET', 'POST'], '/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth:web,admin')
-                ->name('logout');
+                ->name('logout');*/

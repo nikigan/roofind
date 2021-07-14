@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use DebugBar\DebugBar;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -36,12 +38,26 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request): RedirectResponse
     {
+
         $validated = $request->validated();
+        $data = [];
+
+        if ($request->hasFile('files')) {
+            $images = $request->file('files');
+
+            foreach ($images as $image) {
+                $name = $image->getClientOriginalName();
+                $path = 'uploads/images/' . auth()->id() . '/';
+                $image->storeAs($path, $name, 'public');
+                $data[] = $path . $name;
+            }
+        }
 
         Project::query()->create(
             $validated +
             [
-                'creator_id' => auth()->id()
+                'creator_id' => auth()->id(),
+                'files' => json_encode($data)
             ]);
 
         return redirect()->route('projects.index')->with('success', __('Проект успешно создан!'));

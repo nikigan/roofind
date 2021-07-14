@@ -24,7 +24,7 @@
                     @foreach($projects as $project)
                         <div class="col-lg-4">
                             <div class="card project-card shadow-sm">
-                                <img src="https://loremflickr.com/320/240">
+                                <img src="{{ $project->first_image }}">
                                 <div class="p-3">
                                 <h3>{{ $project->title }}</h3>
                                 <p>{{ $project->excerpt }}</p>
